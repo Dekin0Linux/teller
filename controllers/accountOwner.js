@@ -16,6 +16,7 @@ const addOwner = async(req,res)=>{
         res.json(newOwner)
     }catch(err){
         res.json({msg:err.message})
+
     }
 }
 
@@ -44,9 +45,8 @@ const deposit = async (req, res) => {
       );
       if(updatedOwner){
         let depostRecord = transactionModel.create({accountNumber : accNumber ,transactionType : 'deposit',amount : amountToAdd, status : 'success' })
-        res.json(depostRecord)
+        res.json({msg: `Am amount of ${amountToAdd} has been created into your account` })
       }
-      res.json(updatedOwner);
     } catch (err) {
       res.json({ msg: err.message });
     }
@@ -76,7 +76,7 @@ const withdraw = async (req, res) => {
       );
       if(updatedOwner){
         let depostRecord = transactionModel.create({accountNumber : accNumber ,transactionType : 'withdrawal', amount : amountToAdd, status : 'success' })
-        return res.json(depostRecord)
+        return res.json({msg: `Am amount of ${amountToAdd} has been debited into your account` })
       }
       res.json(updatedOwner);
     } catch (err) {
